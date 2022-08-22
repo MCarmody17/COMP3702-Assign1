@@ -1,5 +1,4 @@
 import sys
-
 from constants import *
 from environment import Environment
 
@@ -88,13 +87,15 @@ def main(arglist):
             else:   # char == 'd' or char == 'D'
                 action = SPIN_RIGHT
 
-            action_readable = {FORWARD: 'Forward', REVERSE: 'Reverse', SPIN_LEFT: 'Spin Left', SPIN_RIGHT: 'Spin Right'}
+            action_readable = {FORWARD: 'Forward', REVERSE: 'Reverse',
+                               SPIN_LEFT: 'Spin Left', SPIN_RIGHT: 'Spin Right'}
             print(f'\nSelected: {action_readable[action]}')
 
             success, cost, new_state = env.perform_action(state, action)
 
             if not success:
-                print('\n\n/!\\ Action resulted in collision. Please select a different action.')
+                print(
+                    '\n\n/!\\ Action resulted in collision. Please select a different action.')
                 continue
 
             total_cost += cost
@@ -102,10 +103,10 @@ def main(arglist):
 
             if env.is_solved(state):
                 env.render(state)
-                print(f'Environment solved with a total cost of {round(total_cost, 1)}!')
+                print(
+                    f'Environment solved with a total cost of {round(total_cost, 1)}!')
                 return
 
 
 if __name__ == '__main__':
     main(sys.argv[1:])
-

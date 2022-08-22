@@ -38,7 +38,7 @@ class Environment:
         :param force_valid: When creating states, raise exception if the created State violates validity constraints
         """
         os.system('color')  # enable coloured terminal output
-
+        
         self.force_valid = force_valid
         f = open(filename, 'r')
 
@@ -586,7 +586,6 @@ def widget_get_occupied_cells(w_type, centre, orient):
     """
     Return a list of cell coordinates which are occupied by this widget (useful for checking if the widget is in
     collision and how the widget should move if pushed or pulled by the robot).
-
     :param w_type: widget type
     :param centre: centre point of the widget
     :param orient: orientation of the widget
