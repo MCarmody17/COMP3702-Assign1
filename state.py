@@ -60,7 +60,7 @@ class State:
         self.widget_centres = widget_centres
         self.widget_orients = widget_orients
         self.force_valid = force_valid
-        self.action_cost = 0
+        self.path_cost = 0
         self.action_from_parent = None
         self.parent = None
 
@@ -106,15 +106,15 @@ class State:
         state = self.environment.get_init_state()
         successors = []
         for a in ROBOT_ACTIONS:
-            success, action_cost, new_state = self.environment.perform_action(
+            success, path_cost, new_state = self.environment.perform_action(
                 self, a)
             if success:
                 successors.append(new_state)
-                self.action_cost = action_cost
+                new_state.path_cost = self.path_cost + path_cost
                 new_state.action_from_parent = a
                 new_state.parent = self
         return successors
 
     def __lt__(self, other):
         # compare nodes using path cost (for A*, this is overridden)
-        return self.action_cost < other.action_cost
+        return self.path_cost < other.path_cost

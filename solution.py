@@ -74,9 +74,9 @@ class Solver:
             # add unvisited (or visited at higher path cost) successors to container
             successors = node.get_successors()
             for s in successors:
-                if s not in visited.keys() or s.action_cost < visited[s]:
+                if s not in visited.keys() or s.path_cost < visited[s]:
                    # print("Added")
-                    visited[s] = s.action_cost
+                    visited[s] = s.path_cost
                     heapq.heappush(container, s)
 
         return None
@@ -134,10 +134,10 @@ class Solver:
             # add unvisited (or visited at higher path cost) successors to container
             successors = node.get_successors()
             for s in successors:
-                if s not in visited.keys() or s.action_cost < visited[s]:
+                if s not in visited.keys() or s.path_cost < visited[s]:
                    # print("Added")
-                    visited[s] = s.action_cost
-                    heapq.heappush(container, (s.action_cost + heuristic, s))
+                    visited[s] = s.path_cost
+                    heapq.heappush(container, (s.path_cost + heuristic, s))
         return None
 
         pass

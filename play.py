@@ -28,7 +28,6 @@ def main(arglist):
 
         def windows_getchar():
             return msvcrt.getch().decode('utf-8')
-
         getchar = windows_getchar
 
     except ImportError:
