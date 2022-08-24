@@ -87,32 +87,9 @@ class Solver:
         :return: path (list of actions, where each action is an element of ROBOT_ACTIONS)
         """
 
-        #
-        #
-        # TODO: Implement your A* search code here
-        #
-        # === Important ================================================================================================
-        # To ensure your code works correctly with tester, you should include the following line of code in your main
-        # search loop:
-        #
-        # self.loop_counter.inc()
-        #
-        # e.g.
-        # while loop_condition():
-        #   self.loop_counter.inc()
-        #   ...
-        #
-        # ==============================================================================================================
-        #
-        #
         state = self.environment.get_init_state()
         env = self.environment
         heuristic = 0 + state.get_heuristic()
-        print("Target list: ")
-        print(env.target_list)
-
-        print("State Widget Centres: ")
-        print(state.widget_centres)
         
         
         container = [(heuristic, state)]
@@ -120,7 +97,8 @@ class Solver:
         # dict: state --> path_cost
         visited = {state: 0}
         n_expanded = 0
-
+        print("This is your heuristic")
+        print(heuristic)
         while len(container) > 0:
             self.loop_counter.inc()
             n_expanded += 1
@@ -134,13 +112,13 @@ class Solver:
             # add unvisited (or visited at higher path cost) successors to container
             successors = node.get_successors()
             for s in successors:
-                if s not in visited.keys() or s.path_cost < visited[s]:
-                   # print("Added")
+                if s not in visited.keys():
                     visited[s] = s.path_cost
-                    heapq.heappush(container, (s.path_cost + heuristic, s))
+                    heapq.heappush(container, (s.path_cost + 
+                        heuristic, s))
         return None
 
-        pass
+
         
     #
     #

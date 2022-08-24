@@ -72,6 +72,8 @@ class State:
                 self.widget_centres == other.widget_centres and
                 self.widget_orients == other.widget_orients)
 
+
+
     def get_heuristic(self):
         # Gridworld only
         print("Heuristic: ")
@@ -79,7 +81,7 @@ class State:
         print(number)
         #return abs((self.environment.target_list[0][0] - self.widget_centres[0][0]) + (self.environment.target_list[0][0] - self.widget_centres[0][1]))
         return number
-
+        
 
     def get_path(self):
         """
@@ -94,6 +96,23 @@ class State:
         print("This is the path: ")
         print(path)
         return path
+    
+    def summed_manhattan_heuristic(self):
+    # EightPuzzle only
+        total_displacement = 0
+        for tile in self.environment.target_list:
+            #cur_idx = state.squares.index(tile)
+            cur_row = self.robot_posit[0]//3
+            cur_col = self.robot_posit[1]%3
+            #goal_idx = env.goal.squares.index(tile)
+            goal_row = self.environment.target_list[0][0] // 3
+            goal_col =  self.environment.target_list[0][1]% 3
+            total_displacement += (abs(goal_row - cur_row) + abs(goal_col - cur_col))
+        number = total_displacement // 2
+        
+        return number
+
+
 
     def __hash__(self):
         return hash((self.robot_posit, self.robot_orient, self.widget_centres, self.widget_orients))
